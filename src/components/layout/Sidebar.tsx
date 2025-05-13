@@ -2,6 +2,7 @@
 import React from 'react';
 import { ChartBar, Truck, User, Settings, Archive, Earth } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useTranslation } from 'react-i18next';
 
 const NavItem = ({ 
   icon: Icon, 
@@ -26,36 +27,38 @@ const NavItem = ({
 };
 
 const Sidebar = () => {
+  const { t } = useTranslation();
+  
   return (
     <aside className="bg-white w-56 border-r border-gray-200 h-[calc(100vh-64px)] p-4">
       <div className="space-y-6">
         <div>
           <h3 className="text-xs uppercase tracking-wider text-gray-500 font-semibold px-3 mb-2">
-            Main
+            {t('main')}
           </h3>
           <ul>
-            <NavItem icon={ChartBar} label="Dashboard" active />
-            <NavItem icon={Earth} label="Supply Chain Map" />
-            <NavItem icon={Archive} label="Inventory" />
-            <NavItem icon={Truck} label="Logistics" />
-            <NavItem icon={User} label="Suppliers" />
+            <NavItem icon={ChartBar} label={t('dashboard')} active />
+            <NavItem icon={Earth} label={t('supplyChainMap')} />
+            <NavItem icon={Archive} label={t('inventory')} />
+            <NavItem icon={Truck} label={t('logistics')} />
+            <NavItem icon={User} label={t('suppliers')} />
           </ul>
         </div>
         
         <div>
           <h3 className="text-xs uppercase tracking-wider text-gray-500 font-semibold px-3 mb-2">
-            Reports
+            {t('reports')}
           </h3>
           <ul>
-            <NavItem icon={ChartBar} label="Carbon Footprint" />
-            <NavItem icon={ChartBar} label="Sustainability" />
-            <NavItem icon={ChartBar} label="Compliance" />
+            <NavItem icon={ChartBar} label={t('carbonFootprint')} />
+            <NavItem icon={ChartBar} label={t('sustainability')} />
+            <NavItem icon={ChartBar} label={t('compliance')} />
           </ul>
         </div>
         
         <div className="mt-auto">
           <ul>
-            <NavItem icon={Settings} label="Settings" />
+            <NavItem icon={Settings} label={t('settings')} />
           </ul>
         </div>
       </div>

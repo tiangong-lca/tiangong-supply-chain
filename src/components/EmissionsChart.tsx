@@ -4,8 +4,11 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { emissionsHistory } from '@/utils/dummyData';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import { useTranslation } from 'react-i18next';
 
 const EmissionsChart = () => {
+  const { t } = useTranslation();
+  
   // Process data for the chart - group by date
   const chartData = Object.entries(
     emissionsHistory.reduce((acc, { date, value, category }) => {
@@ -23,7 +26,7 @@ const EmissionsChart = () => {
   return (
     <Card className="col-span-3">
       <CardHeader className="pb-2">
-        <CardTitle>Emissions Trend (2023)</CardTitle>
+        <CardTitle>{t('emissionsTrend')}</CardTitle>
       </CardHeader>
       <Separator />
       <CardContent className="pt-6">
@@ -68,7 +71,7 @@ const EmissionsChart = () => {
               <Area 
                 type="monotone" 
                 dataKey="transportation" 
-                name="Transportation"
+                name={t('transportation')}
                 stroke="#F97316" 
                 fillOpacity={1} 
                 fill="url(#colorTransportation)" 
@@ -76,7 +79,7 @@ const EmissionsChart = () => {
               <Area 
                 type="monotone" 
                 dataKey="manufacturing" 
-                name="Manufacturing"
+                name={t('manufacturing')}
                 stroke="#0EA5E9" 
                 fillOpacity={1} 
                 fill="url(#colorManufacturing)" 
@@ -84,7 +87,7 @@ const EmissionsChart = () => {
               <Area 
                 type="monotone" 
                 dataKey="facilities" 
-                name="Facilities"
+                name={t('facilities')}
                 stroke="#3EB75E" 
                 fillOpacity={1} 
                 fill="url(#colorFacilities)" 

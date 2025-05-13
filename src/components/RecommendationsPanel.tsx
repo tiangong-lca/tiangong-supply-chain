@@ -5,14 +5,17 @@ import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { recommendations } from '@/utils/dummyData';
+import { useTranslation } from 'react-i18next';
 
 const RecommendationsPanel = () => {
+  const { t } = useTranslation();
+
   return (
     <Card>
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between">
-          <CardTitle>Emission Reduction Recommendations</CardTitle>
-          <Badge variant="outline" className="text-eco-green-dark bg-eco-green-light/30">5 Actions</Badge>
+          <CardTitle>{t('emissionReductionRecommendations')}</CardTitle>
+          <Badge variant="outline" className="text-eco-green-dark bg-eco-green-light/30">5 {t('actions')}</Badge>
         </div>
       </CardHeader>
       <Separator />
@@ -36,15 +39,15 @@ const RecommendationsPanel = () => {
                         }
                       `}
                     >
-                      {rec.impact.charAt(0).toUpperCase() + rec.impact.slice(1)} Impact
+                      {t(rec.impact === 'high' ? 'highImpact' : rec.impact === 'medium' ? 'mediumImpact' : 'lowImpact')}
                     </Badge>
                     <span className="text-xs text-gray-500">
-                      Timeline: {rec.timeline}
+                      {t('timeline')}: {rec.timeline}
                     </span>
                   </div>
                 </div>
                 <Button variant="ghost" size="sm" className="text-blue-600">
-                  Details
+                  {t('details')}
                 </Button>
               </div>
             </li>

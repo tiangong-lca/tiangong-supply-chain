@@ -5,8 +5,11 @@ import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { suppliers } from '@/utils/dummyData';
+import { useTranslation } from 'react-i18next';
 
 const SupplierScorecard = () => {
+  const { t } = useTranslation();
+  
   // Sort suppliers by sustainability score in descending order
   const sortedSuppliers = [...suppliers].sort((a, b) => 
     b.sustainabilityScore - a.sustainabilityScore
@@ -15,7 +18,7 @@ const SupplierScorecard = () => {
   return (
     <Card>
       <CardHeader className="pb-2">
-        <CardTitle>Supplier Sustainability Scores</CardTitle>
+        <CardTitle>{t('supplierSustainabilityScores')}</CardTitle>
       </CardHeader>
       <Separator />
       <CardContent className="px-0 py-4">

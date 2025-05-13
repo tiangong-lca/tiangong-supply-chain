@@ -4,6 +4,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { totalCarbonFootprint, categoryColors } from '@/utils/dummyData';
 import { ArrowDown } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const CarbonMetricCard = ({ 
   title, 
@@ -40,19 +41,21 @@ const CarbonMetricCard = ({
 };
 
 const CarbonMetrics = () => {
+  const { t } = useTranslation();
+  
   // In a real app, this would be a real chart using Recharts
   const pieChartData = Object.entries(totalCarbonFootprint.byCategory);
   
   return (
     <Card>
       <CardHeader className="pb-2">
-        <CardTitle>Carbon Footprint Overview</CardTitle>
+        <CardTitle>{t('carbonFootprintOverview')}</CardTitle>
       </CardHeader>
       <Separator />
       <CardContent className="pt-6">
         <div className="grid gap-4 mb-6">
           <CarbonMetricCard
-            title="Total Carbon Emissions"
+            title={t('totalCarbonEmissions')}
             value={totalCarbonFootprint.total}
             unit="tons CO₂e"
             change={totalCarbonFootprint.yearOverYearChange}
@@ -60,19 +63,19 @@ const CarbonMetrics = () => {
           
           <div className="grid grid-cols-2 gap-4">
             <CarbonMetricCard
-              title="Transport Emissions"
+              title={t('transportEmissions')}
               value={totalCarbonFootprint.byCategory.Transportation}
               unit="tons CO₂e"
             />
             <CarbonMetricCard
-              title="Manufacturing"
+              title={t('manufacturing')}
               value={totalCarbonFootprint.byCategory.Manufacturing}
               unit="tons CO₂e"
             />
           </div>
         </div>
         
-        <h3 className="font-medium mb-3">Emissions by Category</h3>
+        <h3 className="font-medium mb-3">{t('emissionsByCategory')}</h3>
         <div className="flex items-center">
           <div className="relative w-24 h-24">
             {/* Simple pie chart visualization */}
@@ -114,7 +117,7 @@ const CarbonMetrics = () => {
                     className="h-3 w-3 rounded-full mr-2"
                     style={{ backgroundColor: categoryColors[category] || '#ccc' }}
                   ></span>
-                  <span className="flex-1">{category}</span>
+                  <span className="flex-1">{t(category.toLowerCase())}</span>
                   <span className="font-medium">{Math.round((value / totalCarbonFootprint.total) * 100)}%</span>
                 </li>
               ))}
